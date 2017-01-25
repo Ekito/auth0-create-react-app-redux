@@ -15,7 +15,6 @@ const getRoutes = (store) => {
     const state = store.getState();
 
     if (state.login.ready && !state.login.loggedIn) {
-      console.log('set next path in authRequired', nextState.location.pathname);
       store.dispatch(nextPath(nextState.location.pathname));
       replace({pathname: LOGIN_PATH});
     }
