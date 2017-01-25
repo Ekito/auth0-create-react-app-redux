@@ -2,7 +2,7 @@ import { LOAD, SAVE } from 'redux-storage';
 
 const todos = (state = {}, action) => {
   switch (action.type) {
-    case 'RECEIVE_PROFILE':
+    case 'RECEIVE_PROFILE_UPDATE':
       return Object.assign({}, state,
         {
           ...action.profile
@@ -21,6 +21,8 @@ const todos = (state = {}, action) => {
           saved: action.saved
         });
     case 'LOGOUT':
+      return {};
+    case 'UPDATE_PROFILE_ERROR':
       return {};
     case LOAD:
       return state;

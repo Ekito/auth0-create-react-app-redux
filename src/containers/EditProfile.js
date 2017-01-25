@@ -5,14 +5,15 @@ import {updateProfile} from '../actions'
 const mapStateToProps = (state) => {
   return {
     accessToken: state.login.access_token,
+    idToken: state.login.id_token,
     profile: state.profile
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateProfile: (userId, newProfile) => {
-      dispatch(updateProfile(userId, newProfile));
+    updateProfile: (userId, tokenId, newProfile) => {
+      dispatch(updateProfile(userId, tokenId, newProfile));
     }
   }
 };

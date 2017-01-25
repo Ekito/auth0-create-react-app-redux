@@ -37,7 +37,6 @@ export const nextPath = (path) => (
 
 export function fetchAsUser(input, init={}) {
   const headers = init.headers || {};
-
   return fetch(input, {
     ...init,
     headers: {
@@ -47,20 +46,27 @@ export function fetchAsUser(input, init={}) {
       ...headers
     }
   }).then((response) => {
-    if (!response.ok) { throw new Error(response); }
+    if (!response.ok) { return response.json().then((json) => ({response, json}))}
+    return {response};
+  }).then(value => {
+    const {response, json} = value;
+    if (!response.ok) {throw new Error(json.message)}
     return response;
   });
 }
 
-export const updateProfile = (userId, newProfile) => {
+export const updateProfile = (userId, accessToken, newProfile) => {
   return dispatch => {
-      dispatch(updateProfile());
+      dispatch(updatingProfile());
       return fetchAsUser(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/users/${userId}`, {
         method: 'PATCH',
-        body: JSON.stringify(newProfile)
+        body: JSON.stringify(newProfile),
+        accessToken: accessToken
       }).then(response => response.json())
         .then(profile => dispatch(receiveProfileUpdate(profile)))
-        .catch(error => dispatch({type: 'UPDATE_PROFILE_ERROR', error}));
+        .catch(error => {
+          return dispatch({type: 'UPDATE_PROFILE_ERROR', error});
+        });
   }
 };
 

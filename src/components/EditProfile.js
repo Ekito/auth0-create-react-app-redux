@@ -22,7 +22,7 @@ class EditProfile extends Component {
           <p><strong>Location:</strong> {user_metadata.location || 'unknown'}</p>
         </div>
         <div className="EditProfile-heading">Edit Profile</div>
-        <form className="EditProfile-form" onSubmit={this.props.updateProfile}>
+        <form className="EditProfile-form" onSubmit={this.onSubmit}>
           <fieldset className="EditProfile-fieldset" disabled={saving}>
             <label className="EditProfile-locationLabel" htmlFor="location">Location</label>
             <input
@@ -49,7 +49,11 @@ class EditProfile extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.updateProfile
+    this.props.updateProfile(this.props.profile.user_id, this.props.idToken, {
+      user_metadata: {
+        location: this.locationInput.value
+      }
+    });
   }
 }
 
