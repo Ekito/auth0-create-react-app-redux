@@ -1,28 +1,24 @@
 import { LOAD, SAVE } from 'redux-storage';
+import { RECEIVE_PROFILE_UPDATE, UPDATING_PROFILE, UPDATE_PROFILE_ERROR, LOGOUT} from '../actions'
 
-const todos = (state = {}, action) => {
+const profile = (state = {}, action) => {
   switch (action.type) {
-    case 'RECEIVE_PROFILE_UPDATE':
-      return Object.assign({}, state,
-        {
-          ...action.profile
-        });
-    case 'UPDATING_PROFILE':
-      return Object.assign({}, state,
-        {
-          saving: action.saving,
-          saved: action.saved
-        });
-    case 'UPDATE_PROFILE':
+    case RECEIVE_PROFILE_UPDATE:
       return Object.assign({}, state,
         {
           ...action.profile,
           saving: action.saving,
           saved: action.saved
         });
-    case 'LOGOUT':
+    case UPDATING_PROFILE:
+      return Object.assign({}, state,
+        {
+          saving: action.saving,
+          saved: action.saved
+        });
+    case LOGOUT:
       return {};
-    case 'UPDATE_PROFILE_ERROR':
+    case UPDATE_PROFILE_ERROR:
       return {};
     case LOAD:
       return state;
@@ -33,4 +29,4 @@ const todos = (state = {}, action) => {
   }
 }
 
-export default todos
+export default profile
