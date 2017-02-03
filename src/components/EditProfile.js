@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import './EditProfile.css';
 
 class EditProfile extends Component {
-  static propTypes = {};
-
 
   render() {
     const {profile, saving, saved} = this.props;

@@ -1,7 +1,7 @@
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 
-import { LOAD, SAVE } from 'redux-storage';
+import { LOAD } from 'redux-storage';
 
 import {REDIRECT_NEXTPATH, NEXT_PATH, AUTHENTICATED, LOGOUT} from '../actions/login'
 
@@ -27,9 +27,6 @@ const todos = (state = {loggedIn: false, ready: false}, action) => {
       return Object.assign({}, state, {nextPath: null, shouldRedirect: false});
     case LOAD:
       return Object.assign({}, state, {ready: true});
-    case SAVE:
-      console.log('Something has changed and written to disk!');
-      break;
     default:
       return state
   }

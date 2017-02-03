@@ -1,4 +1,4 @@
-import { LOAD, SAVE } from 'redux-storage';
+import { LOAD } from 'redux-storage';
 import { RECEIVE_PROFILE_UPDATE, UPDATING_PROFILE, UPDATE_PROFILE_ERROR, LOGOUT} from '../actions/profile'
 
 const profile = (state = {}, action) => {
@@ -22,9 +22,6 @@ const profile = (state = {}, action) => {
       return {};
     case LOAD:
       return state;
-    case SAVE:
-      console.log('Something has changed and written to disk!');
-      break;
     default:
       return state
   }
