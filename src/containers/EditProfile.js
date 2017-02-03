@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import EditProfile from '../components/EditProfile';
-import {updateProfile} from '../actions'
+import {updateProfile} from '../actions/profile'
 
 const mapStateToProps = (state) => {
   return {

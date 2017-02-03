@@ -5,7 +5,7 @@ import Site from "../containers/Site";
 import Home from "./Home";
 import Login from "../containers/Login";
 import EditProfile from "../containers/EditProfile";
-import {nextPath} from '../actions';
+import {nextPath} from '../actions/login';
 
 export const LOGIN_PATH = '/login';
 

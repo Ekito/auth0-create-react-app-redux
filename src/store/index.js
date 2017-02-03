@@ -15,7 +15,7 @@ export default function configureStore(rootReducer) {
   let store = createStore(
     storageReducer,
     applyMiddleware(
-
+      logger,
       thunk,
       storageMiddleware
     )

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import Login from '../components/Login'
 
-import {authenticate, nextPath, redirectTo} from '../actions';
+import {authenticate, nextPath, redirectTo} from '../actions/login';
 
 const mapStateToProps = (state, ownProps) => {
   return {
