@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "auth0-react-scripts": "0.6.20"
+    "react-scripts": "^0.9.5"
   },
   "dependencies": {
     "auth0-lock": "^10.7.3",
