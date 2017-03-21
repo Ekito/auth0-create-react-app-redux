@@ -27,8 +27,9 @@ class Site extends Component {
     if (nextProps.loggedIn && nextProps.shouldRedirect) {
       nextProps.redirectTo(nextProps.nextPath || "/");
     }
-    if (nextProps.loggedIn &&  Object.keys(nextProps.profile).length === 0 ) {
+    if (nextProps.loggedIn && Object.keys(nextProps.profile).length === 0 ) {
       const {fetchProfile, accessToken} = nextProps;
+      console.log("fetching");
       fetchProfile(accessToken);
     }
   }

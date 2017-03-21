@@ -1,5 +1,6 @@
 import { LOAD } from 'redux-storage';
-import { RECEIVE_PROFILE_UPDATE, UPDATING_PROFILE, UPDATE_PROFILE_ERROR, LOGOUT} from '../actions/profile'
+import { RECEIVE_PROFILE_UPDATE, UPDATING_PROFILE, UPDATE_PROFILE_ERROR, RECEIVE_PROFILE, REQUEST_PROFILE} from '../actions/profile'
+import {LOGOUT} from '../actions/login'
 
 const profile = (state = {}, action) => {
   switch (action.type) {
@@ -16,6 +17,12 @@ const profile = (state = {}, action) => {
           saving: action.saving,
           saved: action.saved
         });
+    case RECEIVE_PROFILE: {
+      return Object.assign({}, state, { received: true, ...action.profile })
+    }
+    case REQUEST_PROFILE: {
+      return Object.assign({}, state, { received: false })
+    }
     case LOGOUT:
       return {};
     case UPDATE_PROFILE_ERROR:

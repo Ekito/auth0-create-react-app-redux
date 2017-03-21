@@ -59,12 +59,14 @@ export const updateProfile = (userId, accessToken, newProfile) => {
 };
 
 const requestProfile = () => {
+  console.log('requestProfile');
   return {
     type: REQUEST_PROFILE
   }
 };
 
 const receiveProfile = (profile) =>  {
+  console.log('receiveProfile', profile);
   return {
     type: RECEIVE_PROFILE,
     profile
