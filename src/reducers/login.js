@@ -5,7 +5,7 @@ import { LOAD } from 'redux-storage';
 
 import {REDIRECT_NEXTPATH, NEXT_PATH, AUTHENTICATED, LOGOUT} from '../actions/login'
 
-const todos = (state = {loggedIn: false, ready: false}, action) => {
+const login = (state = {loggedIn: false, ready: false}, action) => {
   switch (action.type) {
     case AUTHENTICATED:
       return Object.assign({}, state,
@@ -32,4 +32,4 @@ const todos = (state = {loggedIn: false, ready: false}, action) => {
   }
 }
 
-export default todos
+export default login

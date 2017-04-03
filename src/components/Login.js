@@ -3,6 +3,7 @@ import './Login.css';
 import Auth0Lock from 'auth0-lock';
 
 const LOGIN_ROUTE = '/login';
+const APP_ROOT = '/';
 
 if (!process.env.REACT_APP_AUTH0_CLIENT_ID || !process.env.REACT_APP_AUTH0_DOMAIN) {
   throw new Error('Please define `REACT_APP_AUTH0_CLIENT_ID` and `REACT_APP_AUTH0_DOMAIN` in your .env file');
@@ -20,26 +21,33 @@ const lock = new Auth0Lock(
 
 class Login extends Component {
   componentDidMount() {
-    if (this.props.route.path === '/login')
+    //FIXME should remove transfert to ROOT ?
+    if (this.props.currentPath === LOGIN_ROUTE)
     {
       if (!this.props.nextPath) {
-        this.props.setNextPath('/');
+        this.props.actions.setNextPath(APP_ROOT);
       }
       lock.show();
     }
-    const authenticate = this.props.authenticate;
+
     lock.on('authenticated', authResult => {
-      return authenticate(authResult);
+      return this.props.actions.authenticate(authResult);
     });
 
-    lock.on('hide', () => this.props.redirectTo('/'));
+    lock.on('hide', () => this.props.actions.redirectTo(APP_ROOT));
   }
 
   render() {
     return (
-      <div/>
+      <div id="lock-react"/>
     );
   }
+}
+
+Login.propTypes = {
+  actions: React.PropTypes.arrayOf(React.PropTypes.func),
+  currentPath: React.PropTypes.string,
+  nextPath: React.PropTypes.string
 }
 
 export default Login;
