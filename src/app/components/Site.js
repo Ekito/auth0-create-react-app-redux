@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
-import logo from '../logo.svg';
+import logo from './logo.svg';
 import './Site.css';
 
 class Site extends Component {

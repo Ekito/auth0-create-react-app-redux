@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import Login from '../components/Login'
+import Login from './Login'
 
-import {authenticate, setNextPath, redirectTo} from '../actions/login';
+import {authenticate, setNextPath, redirectTo} from '../actions';
 import { bindActionCreators } from 'redux'
 
 export const LOGIN_PATH = '/login';

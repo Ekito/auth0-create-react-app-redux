@@ -3,9 +3,9 @@ const ACCESS_TOKEN_KEY = 'access_token';
 
 import { LOAD } from 'redux-storage';
 
-import {REDIRECT_NEXTPATH, NEXT_PATH, AUTHENTICATED, LOGOUT} from '../actions/login'
+import {REDIRECT_NEXTPATH, NEXT_PATH, AUTHENTICATED, LOGOUT} from '../login/actions'
 
-const login = (state = {loggedIn: false, ready: false}, action) => {
+const reducers = (state = {loggedIn: false, ready: false}, action) => {
   switch (action.type) {
     case AUTHENTICATED:
       return Object.assign({}, state,
@@ -32,4 +32,4 @@ const login = (state = {loggedIn: false, ready: false}, action) => {
   }
 }
 
-export default login
+export default reducers

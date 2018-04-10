@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import Site from '../components/Site';
-import { logout, redirectTo } from '../actions/login';
-import { fetchProfile } from '../actions/profile';
+import Site from './components/Site';
+import { logout, redirectTo } from '../login/actions';
+import { fetchProfile } from '../profile/actions';
 
 const mapStateToProps = (state) => {
   return {

@@ -1,10 +1,10 @@
 import React, {PropTypes} from 'react';
 import {Provider} from 'react-redux';
 import {Router, Route, browserHistory} from 'react-router';
-import Site from "../containers/Site";
+import Site from "../containers";
 import Home from "./Home";
-import Login, {authRequired} from "../containers/Login";
-import EditProfile from "../containers/EditProfile";
+import Login, {authRequired} from "../../login/components/containers";
+import EditProfile from "../../profile/containers";
 
 const getRoutes = (store) => {
   return (

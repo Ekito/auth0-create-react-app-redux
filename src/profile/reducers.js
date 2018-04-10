@@ -1,8 +1,8 @@
 import { LOAD } from 'redux-storage';
-import { RECEIVE_PROFILE_UPDATE, UPDATING_PROFILE, UPDATE_PROFILE_ERROR, RECEIVE_PROFILE, REQUEST_PROFILE} from '../actions/profile'
-import {LOGOUT} from '../actions/login'
+import { RECEIVE_PROFILE_UPDATE, UPDATING_PROFILE, UPDATE_PROFILE_ERROR, RECEIVE_PROFILE, REQUEST_PROFILE} from './actions'
+import {LOGOUT} from '../login/actions'
 
-const profile = (state = {}, action) => {
+const reducers = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_PROFILE_UPDATE:
       return Object.assign({}, state,
@@ -34,4 +34,4 @@ const profile = (state = {}, action) => {
   }
 }
 
-export default profile
+export default reducers
