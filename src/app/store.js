@@ -12,13 +12,13 @@ export default function configureStore(rootReducer) {
 
   const storageMiddleware = storage.createMiddleware(engine);
 
-  let store = createStore(
+  const store = createStore(
     storageReducer,
     applyMiddleware(
       logger,
       thunk,
-      storageMiddleware
-    )
+      storageMiddleware,
+    ),
   );
   const load = storage.createLoader(engine);
   return load(store).then(() => store);

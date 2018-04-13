@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
-import './Login.css';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import Auth0Lock from 'auth0-lock';
+import './Login.css';
 
 const LOGIN_ROUTE = '/login';
 const APP_ROOT = '/';
@@ -14,40 +15,38 @@ const lock = new Auth0Lock(
   process.env.REACT_APP_AUTH0_DOMAIN, {
     auth: {
       redirectUrl: `${window.location.origin}${LOGIN_ROUTE}/callback`,
-      responseType: 'token'
-    }
-  }
+      responseType: 'token',
+    },
+  },
 );
 
 class Login extends Component {
   componentDidMount() {
-    //FIXME should remove transfert to ROOT ?
-    if (this.props.currentPath === LOGIN_ROUTE)
-    {
+    // FIXME should remove transfert to ROOT ?
+    if (this.props.currentPath === LOGIN_ROUTE) {
       if (!this.props.nextPath) {
         this.props.actions.setNextPath(APP_ROOT);
       }
       lock.show();
     }
 
-    lock.on('authenticated', authResult => {
-      return this.props.actions.authenticate(authResult);
-    });
+    lock.on('authenticated', authResult => this.props.actions.authenticate(authResult));
 
-    lock.on('hide', () => this.props.actions.redirectTo(APP_ROOT));
+    lock.on('hide', () => this.props.actions.redirectTo(APP_ROOT, this.props.history));
   }
 
   render() {
     return (
-      <div id="lock-react"/>
+      <div id="lock-react" />
     );
   }
 }
 
 Login.propTypes = {
-  actions: React.PropTypes.arrayOf(React.PropTypes.func),
-  currentPath: React.PropTypes.string,
-  nextPath: React.PropTypes.string
-}
+  actions: PropTypes.arrayOf(PropTypes.func).isRequired,
+  currentPath: PropTypes.string.isRequired,
+  nextPath: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+};
 
 export default Login;
