@@ -1,10 +1,15 @@
 import { LOAD } from 'redux-storage';
-import { REDIRECT_NEXTPATH, NEXT_PATH, AUTHENTICATED, LOGOUT } from '../login/actions';
+import { AUTHENTICATED, LOGOUT, NEXT_PATH, REDIRECT_NEXTPATH } from '../login/actions';
 
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 
-const reducers = (state = { loggedIn: false, ready: false }, action) => {
+const reducers = (state = {
+  loggedIn: false,
+  ready: false,
+  shouldRedirect: false,
+  [ACCESS_TOKEN_KEY]: null,
+}, action) => {
   switch (action.type) {
     case AUTHENTICATED:
       return Object.assign(

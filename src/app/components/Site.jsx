@@ -42,6 +42,9 @@ class Site extends Component {
           <h2>Welcome to React + Auth0</h2>
           {this.renderUserControls()}
         </div>
+        <div className="Site-page">
+          {this.props.children}
+        </div>
       </div>
     );
   }
@@ -53,11 +56,11 @@ Site.propTypes = {
   fetchProfile: PropTypes.func.isRequired,
   redirectTo: PropTypes.func.isRequired,
   shouldRedirect: PropTypes.bool.isRequired,
-  accessToken: PropTypes.string.isRequired,
-  nextPath: PropTypes.string.isRequired,
+  accessToken: PropTypes.string,
+  nextPath: PropTypes.string,
   profile: PropTypes.shape({
-    picture: PropTypes.string.isRequired,
-    nickname: PropTypes.string.isRequired,
+    picture: PropTypes.string,
+    nickname: PropTypes.string,
   }).isRequired,
 };
 
