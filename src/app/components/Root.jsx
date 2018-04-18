@@ -7,7 +7,6 @@ import Home from './Home';
 import { authRequired } from '../../app/auth';
 import EditProfile from '../../profile/containers';
 import LoadableLogin from '../../login/components/LoadableLogin';
-//import Login from '../../login/components/containers';
 
 const getRoutes = store => (
   <Route component={Site}>

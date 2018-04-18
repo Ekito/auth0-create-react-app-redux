@@ -8,18 +8,19 @@ class Loading extends Component {
     );
   }
 }
-
+// eslint-disable
 const LoadableComponent = Loadable({
     loader: () => {
-      return import('./containers')
+      return import('./containers') //eslint-
     },
     loading: Loading
   })
 ;
 
-export default class LoadableLogin extends React.Component {
+class LoadableLogin extends React.Component {
   render() {
     return <LoadableComponent {...this.props}/>;
   }
 }
 
+export default LoadableLogin;
