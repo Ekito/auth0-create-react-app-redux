@@ -4,6 +4,7 @@ import Root from './app/components/Root';
 import './app/components/index.css';
 import configureStore from './app/store';
 import authApp from './app/reducers';
+import registerServiceWorker from './registerServiceWorker';
 
 /* eslint-disable react/jsx-filename-extension */
 configureStore(authApp).then((store) => {
@@ -12,4 +13,6 @@ configureStore(authApp).then((store) => {
     document.getElementById('root'),
   );
 });
+
+registerServiceWorker();
 

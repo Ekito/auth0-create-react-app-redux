@@ -10,29 +10,29 @@ if (!process.env.REACT_APP_AUTH0_CLIENT_ID || !process.env.REACT_APP_AUTH0_DOMAI
   throw new Error('Please define `REACT_APP_AUTH0_CLIENT_ID` and `REACT_APP_AUTH0_DOMAIN` in your .env file');
 }
 
-const lock = new Auth0Lock(
-  process.env.REACT_APP_AUTH0_CLIENT_ID,
-  process.env.REACT_APP_AUTH0_DOMAIN, {
-    auth: {
-      redirectUrl: `${window.location.origin}${LOGIN_ROUTE}/callback`,
-      responseType: 'token',
-    },
-  },
-);
 
 class Login extends Component {
   componentDidMount() {
+    this.lock = new Auth0Lock(
+      process.env.REACT_APP_AUTH0_CLIENT_ID,
+      process.env.REACT_APP_AUTH0_DOMAIN, {
+        auth: {
+          redirectUrl: `${window.location.origin}${LOGIN_ROUTE}/callback`,
+          responseType: 'token',
+        },
+      },
+    );
     // FIXME should remove transfert to ROOT ?
     if (this.props.currentPath === LOGIN_ROUTE) {
       if (!this.props.nextPath) {
         this.props.actions.setNextPath(APP_ROOT);
       }
-      lock.show();
+      this.lock.show();
     }
 
-    lock.on('authenticated', authResult => this.props.actions.authenticate(authResult));
+    this.lock.on('authenticated', authResult => this.props.actions.authenticate(authResult));
 
-    lock.on('hide', () => this.props.actions.redirectTo(APP_ROOT, this.props.history));
+    this.lock.on('hide', () => this.props.actions.redirectTo(APP_ROOT, this.props.history));
   }
 
   render() {

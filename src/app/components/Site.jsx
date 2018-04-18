@@ -52,6 +52,7 @@ class Site extends Component {
 
 Site.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
+  children: PropTypes.object.isRequired, // eslint-disable-next-line react/forbid-prop-types
   onLogout: PropTypes.func.isRequired,
   fetchProfile: PropTypes.func.isRequired,
   redirectTo: PropTypes.func.isRequired,
