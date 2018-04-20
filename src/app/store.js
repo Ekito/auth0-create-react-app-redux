@@ -1,10 +1,8 @@
 import * as storage from 'redux-storage';
 import thunk from 'redux-thunk';
-import createLogger from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
 import createEngine from 'redux-storage-engine-localstorage';
-
-const logger = createLogger();
+import logger from 'redux-logger';
 
 export default function configureStore(rootReducer) {
   const storageReducer = storage.reducer(rootReducer);
