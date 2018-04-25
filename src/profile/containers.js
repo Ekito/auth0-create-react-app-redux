@@ -9,9 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateProfile: (userId, tokenId, newProfile) => {
-    dispatch(updateProfile(userId, tokenId, newProfile));
-  },
+  updateProfile: updateProfile(dispatch),
 });
 
 const SiteContainer = connect(

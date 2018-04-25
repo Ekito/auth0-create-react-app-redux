@@ -41,7 +41,7 @@ const receiveProfileUpdate = profile => ({
   saved: true,
 });
 
-export const updateProfile = (userId, accessToken, newProfile) => (dispatch) => {
+export const updateProfile = dispatch => (userId, accessToken, newProfile) => {
   dispatch(updatingProfile());
   return fetchAsUser(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/api/v2/users/${userId}`, {
     method: 'PATCH',
@@ -61,7 +61,7 @@ const receiveProfile = profile => ({
   profile,
 });
 
-export const fetchProfile = accessToken => (dispatch) => {
+export const fetchProfile = dispatch => (accessToken) => {
   dispatch(requestProfile());
   return fetchAsUser(`https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo`, { accessToken })
     .then(response => response.json())

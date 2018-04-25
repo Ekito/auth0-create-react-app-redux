@@ -15,9 +15,7 @@ const mapDispatchToProps = dispatch => ({
   onLogout: () => {
     dispatch(logout());
   },
-  fetchProfile: (accessToken) => {
-    dispatch(fetchProfile(accessToken));
-  },
+  fetchProfile: fetchProfile(dispatch),
 });
 
 const SiteContainer = withRouter(connect(
