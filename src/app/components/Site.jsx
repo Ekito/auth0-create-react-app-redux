@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
+
 import logo from './logo.svg';
 import './Site.css';
 import Home from './Home';
@@ -49,11 +50,12 @@ class Site extends Component {
           {this.renderUserControls()}
         </div>
         <div className="Site-page">
-          <Route path="/" component={Home} />
-
-          <Route path="/login" exact component={LoadableLogin} />
-          <Route path="/login/callback" component={LoadableLogin} />
-          <PrivateRoute path="/profile/edit" component={EditProfile} loggedIn={this.props.login.loggedIn} />
+          <Switch>
+            <Route path="/login" exact component={LoadableLogin} />
+            <Route path="/login/callback" exact component={LoadableLogin} />
+            <PrivateRoute path="/profile/edit" component={EditProfile} loggedIn={this.props.login.loggedIn} />
+            <Route path="/" component={Home} />
+          </Switch>
         </div>
       </div>
     );
