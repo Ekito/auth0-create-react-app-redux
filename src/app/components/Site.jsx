@@ -7,7 +7,7 @@ import './Site.css';
 import Home from './Home';
 import EditProfile from '../../profile/containers';
 import LoadableLogin from '../../login/components/LoadableLogin';
-import { PrivateRoute } from '../auth';
+import { PrivateRoute } from '../../login/components/auth';
 
 
 class Site extends Component {
