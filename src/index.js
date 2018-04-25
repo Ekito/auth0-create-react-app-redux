@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import Site from './app/containers';
 import './app/components/index.css';
 import configureStore from './app/store';
 import authApp from './app/reducers';
 import registerServiceWorker from './registerServiceWorker';
-
-
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Site from './app/containers';
 
 /* eslint-disable react/jsx-filename-extension */
 configureStore(authApp).then((store) => {
