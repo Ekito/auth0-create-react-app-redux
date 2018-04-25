@@ -3,8 +3,8 @@ import EditProfile from './components/EditProfile';
 import { updateProfile } from './actions';
 
 const mapStateToProps = state => ({
-  accessToken: state.login.access_token,
-  idToken: state.login.id_token,
+  accessToken: state.login.accessToken,
+  idToken: state.login.idToken,
   profile: state.profile,
 });
 

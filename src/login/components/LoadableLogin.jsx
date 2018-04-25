@@ -10,6 +10,6 @@ const LoadableComponent = Loadable({
   loading: Loading,
 });
 
-const LoadableLogin = (props) => (<LoadableComponent {...props} />);
+const LoadableLogin = props => (<LoadableComponent {...props} />);
 
 export default LoadableLogin;

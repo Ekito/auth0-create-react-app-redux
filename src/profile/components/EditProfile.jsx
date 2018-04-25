@@ -9,6 +9,7 @@ class EditProfile extends Component {
     this.locationInput = React.createRef();
     // This binding is necessary to make `this` work in the callback
     this.updateOnSubmit = this.updateOnSubmit.bind(this);
+    this.state = { editing: true };
   }
 
   updateOnSubmit(event) {
@@ -18,12 +19,17 @@ class EditProfile extends Component {
         location: this.locationInput.current.value,
       },
     });
+    this.setState({ editing: false });
+  }
+
+  updateContent() {
+    this.setState({ editing: true });
   }
 
   render() {
-    const { profile, saving, saved } = this.props;
+    const { profile } = this.props;
     const userMetadata = profile.user_metadata || {};
-
+    /* eslint-disable jsx-a11y/label-has-for */
     return (
       <div className="EditProfile">
         <div className="EditProfile-heading">Your Profile</div>
@@ -37,22 +43,22 @@ class EditProfile extends Component {
         </div>
         <div className="EditProfile-heading">Edit Profile</div>
         <form className="EditProfile-form" onSubmit={this.updateOnSubmit}>
-          <fieldset className="EditProfile-fieldset" disabled={saving}>
-            <label className="EditProfile-locationLabel" htmlFor="location">Location
-              <input
-                ref={this.locationInput}
-                className="EditProfile-locationInput"
-                id="location"
-                type="text"
-                placeholder="City or State"
-                defaultValue={userMetadata.location}
-              />
-            </label>
+          <fieldset className="EditProfile-fieldset" disabled={this.props.profile.saving}>
+            <label className="EditProfile-locationLabel" htmlFor="location">Location</label>
+            <input
+              ref={this.locationInput}
+              className="EditProfile-locationInput"
+              id="location"
+              type="text"
+              placeholder="City or State"
+              defaultValue={userMetadata.location}
+              onChange={e => this.updateContent(e)}
+            />
             <div className="EditProfile-formControls">
               <button className="EditProfile-submitButton" type="submit">
-                {saving ? 'Saving...' : 'Save'}
+                {this.props.profile.saving ? 'Saving...' : 'Save'}
               </button>
-              {saved && (
+              {this.props.profile.saved && !this.state.editing && (
                 <div className="EditProfile-saved">Saved</div>
               )}
             </div>
@@ -67,15 +73,11 @@ EditProfile.propTypes = {
   updateProfile: PropTypes.func.isRequired,
   profile: PropTypes.shape({
     user_id: PropTypes.string.isRequired,
+    saved: PropTypes.bool,
+    saving: PropTypes.bool,
   }).isRequired,
   idToken: PropTypes.string.isRequired,
-  saving: PropTypes.bool,
-  saved: PropTypes.bool,
 };
 
-EditProfile.defaultProps = {
-  saved: false,
-  saving: false,
-};
 
 export default EditProfile;
