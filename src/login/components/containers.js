@@ -1,21 +1,21 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import Login from './Login';
-import { authenticate, redirectTo, setNextPath } from '../actions';
+import { authenticate, authenticating } from '../actions';
 
-const mapStateToProps = (state, ownProps) => ({
-  currentPath: ownProps.route.path,
-  nextPath: state.login.nextPath,
+
+const mapStateToProps = state => ({
+  login: state.login,
+  redirectToReferrer: state.login.redirectToReferrer,
 });
 
-
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({
-    authenticate,
-    setNextPath,
-    redirectTo,
-  }, dispatch),
+  authenticating: (from) => {
+    dispatch(authenticating(from));
+  },
+  authenticate: (authenticatdUser) => {
+    dispatch(authenticate(authenticatdUser));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

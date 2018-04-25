@@ -1,33 +1,17 @@
-import { browserHistory } from 'react-router';
-
-export const REDIRECT_NEXTPATH = 'REDIRECT_NEXTPATH';
 export const LOGOUT = 'LOGOUT';
-export const NEXT_PATH = 'NEXT_PATH';
 export const AUTHENTICATED = 'AUTHENTICATED';
+export const AUTHENTICATING = 'AUTHENTICATING';
 
 export const authenticate = authenticatdUser => ({
   type: AUTHENTICATED,
-  idToken: authenticatdUser.idToken,
-  accessToken: authenticatdUser.accessToken,
+  ...authenticatdUser,
 });
 
-export const setNextPath = path => (
-  {
-    type: NEXT_PATH,
-    path,
-  }
-);
+export const authenticating = from => ({
+  type: AUTHENTICATING,
+  from,
+});
 
-export const logout = () => {
-  browserHistory.push('/');
-  return {
-    type: LOGOUT,
-  };
-};
-
-export const redirectTo = (nextPath) => {
-  browserHistory.push(nextPath);
-  return {
-    type: REDIRECT_NEXTPATH,
-  };
-};
+export const logout = () => ({
+  type: LOGOUT,
+});

@@ -1,29 +1,35 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link, Route } from 'react-router-dom';
 import logo from './logo.svg';
 import './Site.css';
+import Home from './Home';
+import EditProfile from '../../profile/containers';
+import LoadableLogin from '../../login/components/LoadableLogin';
+import { PrivateRoute } from '../auth';
+
 
 class Site extends Component {
   componentWillReceiveProps(nextProps) {
-    if (nextProps.loggedIn && nextProps.shouldRedirect) {
-      nextProps.redirectTo(nextProps.nextPath || '/');
-    }
-    if (nextProps.loggedIn && Object.keys(nextProps.profile).length === 0) {
-      const { fetchProfile, accessToken } = nextProps;
-      fetchProfile(accessToken);
+    if (nextProps.login.loggedIn && Object.keys(nextProps.profile).length === 0) {
+      nextProps.fetchProfile(nextProps.login.accessToken);
     }
   }
 
-  renderUserControls() {
-    const { loggedIn, onLogout, profile } = this.props;
+  onLogout() {
+    this.props.history.push('/');
+    this.props.onLogout();
+  }
 
-    if (loggedIn) {
+  renderUserControls() {
+    const { profile } = this.props;
+
+    if (this.props.login.loggedIn) {
       return (
         <div className="Site-profileControls">
           <img className="Site-profilePicture" src={profile.picture} alt={profile.nickname} />
           <Link to="/profile/edit">{profile.nickname}</Link> &middot;
-          <button onClick={onLogout}>Log Out</button>
+          <button onClick={e => this.onLogout(e)}>Log Out</button>
         </div>
       );
     }
@@ -43,7 +49,11 @@ class Site extends Component {
           {this.renderUserControls()}
         </div>
         <div className="Site-page">
-          {this.props.children}
+          <Route path="/" component={Home} />
+
+          <Route path="/login" exact component={LoadableLogin} />
+          <Route path="/login/callback" component={LoadableLogin} />
+          <PrivateRoute path="/profile/edit" component={EditProfile} loggedIn={this.props.login.loggedIn} />
         </div>
       </div>
     );
@@ -51,18 +61,17 @@ class Site extends Component {
 }
 
 Site.propTypes = {
-  loggedIn: PropTypes.bool.isRequired,
-  children: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-  onLogout: PropTypes.func.isRequired,
+  login: PropTypes.shape({
+    loggedIn: PropTypes.bool,
+    accessToken: PropTypes.string,
+  }).isRequired,
   fetchProfile: PropTypes.func.isRequired,
-  redirectTo: PropTypes.func.isRequired,
-  shouldRedirect: PropTypes.bool.isRequired,
-  accessToken: PropTypes.string,
-  nextPath: PropTypes.string,
   profile: PropTypes.shape({
     picture: PropTypes.string,
     nickname: PropTypes.string,
   }).isRequired,
+  onLogout: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired, // eslint-disable-line
 };
 
 export default Site;

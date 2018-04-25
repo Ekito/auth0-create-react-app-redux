@@ -1,31 +1,28 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+
 import Site from './components/Site';
-import { logout, redirectTo } from '../login/actions';
+import { logout } from '../login/actions';
 import { fetchProfile } from '../profile/actions';
 
+
 const mapStateToProps = state => ({
-  loggedIn: state.login.loggedIn,
-  nextPath: state.login.nextPath,
-  shouldRedirect: state.login.shouldRedirect,
-  accessToken: state.login.access_token,
+  login: state.login,
   profile: state.profile,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLogout: (id) => {
-    dispatch(logout(id));
+  onLogout: () => {
+    dispatch(logout());
   },
   fetchProfile: (accessToken) => {
     dispatch(fetchProfile(accessToken));
   },
-  redirectTo: (nextPath) => {
-    dispatch(redirectTo(nextPath));
-  },
 });
 
-const SiteContainer = connect(
+const SiteContainer = withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Site);
+)(Site));
 
 export default SiteContainer;

@@ -1,28 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Site from '../containers';
-import Home from './Home';
-import { authRequired } from '../../app/auth';
-import EditProfile from '../../profile/containers';
-import LoadableLogin from '../../login/components/LoadableLogin';
 
 const getRoutes = store => (
-  <Route component={Site}>
-    <Route path="/" component={Home} />
-    <Route path="/login" component={LoadableLogin} />
-    <Route path="/login/callback" component={LoadableLogin} />
-    <Route onEnter={authRequired(store)}>
-      {/* Place all authenticated routes here */}
-      <Route path="/profile/edit" component={EditProfile} />
-    </Route>
-  </Route>
+  <Route path="/" component={Site} store={store} />
 );
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router>
       { getRoutes(store) }
     </Router>
   </Provider>

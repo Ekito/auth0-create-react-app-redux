@@ -38,15 +38,16 @@ class EditProfile extends Component {
         <div className="EditProfile-heading">Edit Profile</div>
         <form className="EditProfile-form" onSubmit={this.updateOnSubmit}>
           <fieldset className="EditProfile-fieldset" disabled={saving}>
-            <label className="EditProfile-locationLabel" htmlFor="location">Location</label>
-            <input
-              ref={this.locationInput}
-              className="EditProfile-locationInput"
-              id="location"
-              type="text"
-              placeholder="City or State"
-              defaultValue={userMetadata.location}
-            />
+            <label className="EditProfile-locationLabel" htmlFor="location">Location
+              <input
+                ref={this.locationInput}
+                className="EditProfile-locationInput"
+                id="location"
+                type="text"
+                placeholder="City or State"
+                defaultValue={userMetadata.location}
+              />
+            </label>
             <div className="EditProfile-formControls">
               <button className="EditProfile-submitButton" type="submit">
                 {saving ? 'Saving...' : 'Save'}
@@ -68,8 +69,13 @@ EditProfile.propTypes = {
     user_id: PropTypes.string.isRequired,
   }).isRequired,
   idToken: PropTypes.string.isRequired,
-  saving: PropTypes.bool.isRequired,
-  saved: PropTypes.bool.isRequired,
+  saving: PropTypes.bool,
+  saved: PropTypes.bool,
+};
+
+EditProfile.defaultProps = {
+  saved: false,
+  saving: false,
 };
 
 export default EditProfile;
