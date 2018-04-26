@@ -11,9 +11,9 @@ if (!process.env.REACT_APP_AUTH0_CLIENT_ID || !process.env.REACT_APP_AUTH0_DOMAI
   throw new Error('Please define `REACT_APP_AUTH0_CLIENT_ID` and `REACT_APP_AUTH0_DOMAIN` in your .env file');
 }
 
-
 class Login extends Component {
   componentDidMount() {
+    const userLang = navigator.language || navigator.userLanguage;
     this.lock = new Auth0Lock(
       process.env.REACT_APP_AUTH0_CLIENT_ID,
       process.env.REACT_APP_AUTH0_DOMAIN, {
@@ -21,6 +21,7 @@ class Login extends Component {
           redirectUrl: `${window.location.origin}${LOGIN_ROUTE}/callback`,
           responseType: 'token',
         },
+        language: userLang,
       },
     );
 
