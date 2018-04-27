@@ -1,9 +1,7 @@
 import { Route, Redirect } from 'react-router-dom';
 import React from 'react';
-import { fetchProfile } from "../../profile/actions";
-import Site from "../../app/components/Site";
-import { connect } from "react-redux";
-import { withRouter } from "react-router";
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 class PrivateRouteComponent extends Route {
 
