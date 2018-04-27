@@ -53,7 +53,7 @@ class Site extends Component {
           <Switch>
             <Route path="/login" exact component={LoadableLogin} />
             <Route path="/login/callback" exact component={LoadableLogin} />
-            <PrivateRoute path="/profile/edit" component={EditProfile} loggedIn={this.props.login.loggedIn} />
+            <PrivateRoute path="/profile/edit" component={EditProfile}/>
             <Route path="/" component={Home} />
           </Switch>
         </div>

@@ -1,8 +1,34 @@
 import { Route, Redirect } from 'react-router-dom';
 import React from 'react';
-import PropTypes from 'prop-types';
+import { fetchProfile } from "../../profile/actions";
+import Site from "../../app/components/Site";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
-export const PrivateRoute = ({ component: Component, ...rest }) => (
+class PrivateRouteComponent extends Route {
+
+  render() {
+    const Component = this.props.component;
+    return this.props.login.loggedIn ? <Component {...this.props} /> : <Redirect
+      to={{
+        pathname: '/login',
+        state: { from: this.props.location.pathname },
+      }}
+    />;
+  }
+}
+
+const mapStateToProps = state => ({
+  login: state.login,
+});
+
+export const PrivateRoute = withRouter(connect(
+  mapStateToProps,
+)(PrivateRouteComponent));
+
+export default PrivateRoute;
+
+/*export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props => (rest.loggedIn ?
@@ -20,6 +46,4 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
 PrivateRoute.propTypes = {
   component: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   location: PropTypes.shape({ pathname: PropTypes.string }).isRequired,
-};
-
-export default PrivateRoute;
+};*/
