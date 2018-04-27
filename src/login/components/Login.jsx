@@ -21,7 +21,7 @@ class Login extends Component {
           redirectUrl: `${window.location.origin}${LOGIN_ROUTE}/callback`,
           responseType: 'token',
         },
-        language: userLang,
+        language: userLang.substring(0, 2),
       },
     );
 
